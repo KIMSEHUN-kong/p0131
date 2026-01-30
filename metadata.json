@@ -1,0 +1,7 @@
+{
+  "name": "철학/심리 유튜브 생성기 1/30 검색기능 vercel배포",
+  "description": "중장년층을 위한 심리학 및 철학 기반 유튜브 대본과 스토리보드를 생성하는 전문 AI 도구입니다.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
