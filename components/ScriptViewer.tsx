@@ -12,9 +12,10 @@ interface ScriptViewerProps {
   onBack: () => void;
   protagonistName: string;
   scriptType: ScriptType;
+  onChangeApiKey: () => void;
 }
 
-export const ScriptViewer: React.FC<ScriptViewerProps> = ({ initialSections = [], title, onBack, protagonistName, scriptType }) => {
+export const ScriptViewer: React.FC<ScriptViewerProps> = ({ initialSections = [], title, onBack, protagonistName, scriptType, onChangeApiKey }) => {
   const [activeTab, setActiveTab] = useState<'text' | 'visual' | 'audio' | 'preview'>('text');
   const [copied, setCopied] = useState(false);
   const [sections, setSections] = useState<ScriptSection[]>(initialSections || []);
@@ -116,6 +117,7 @@ export const ScriptViewer: React.FC<ScriptViewerProps> = ({ initialSections = []
             protagonist={protagonist}
             setProtagonist={setProtagonist}
             scriptType={scriptType}
+            onChangeApiKey={onChangeApiKey}
           />
         )}
         {activeTab === 'audio' && <TTSGenerator script={fullScript} />}

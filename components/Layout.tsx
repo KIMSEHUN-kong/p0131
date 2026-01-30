@@ -4,10 +4,10 @@ import { Brain, Sparkles, KeyRound } from 'lucide-react';
 
 interface LayoutProps {
   children: React.ReactNode;
-  onResetApiKey?: () => void;
+  onChangeApiKey?: () => void;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children, onResetApiKey }) => {
+export const Layout: React.FC<LayoutProps> = ({ children, onChangeApiKey }) => {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
       <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
@@ -25,11 +25,11 @@ export const Layout: React.FC<LayoutProps> = ({ children, onResetApiKey }) => {
                 <Sparkles size={18} className="text-amber-500" />
                 <span>Psychology Script Expert</span>
              </div>
-             {onResetApiKey && (
+             {onChangeApiKey && (
                <button 
-                onClick={onResetApiKey}
+                onClick={onChangeApiKey}
                 className="p-2 hover:bg-slate-100 rounded-full text-slate-400 hover:text-indigo-600 transition-colors"
-                title="API 키 변경/로그아웃"
+                title="API 키 설정/변경"
                >
                  <KeyRound size={18} />
                </button>

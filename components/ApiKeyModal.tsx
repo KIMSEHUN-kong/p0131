@@ -1,12 +1,13 @@
 
 import React, { useState } from 'react';
-import { Key, ShieldCheck, ChevronRight, AlertCircle } from 'lucide-react';
+import { Key, ShieldCheck, ChevronRight, AlertCircle, X } from 'lucide-react';
 
 interface ApiKeyModalProps {
   onSave: () => void;
+  onClose?: () => void;
 }
 
-export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({ onSave }) => {
+export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({ onSave, onClose }) => {
   const [key, setKey] = useState('');
   const [error, setError] = useState('');
 
@@ -27,13 +28,24 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({ onSave }) => {
 
   return (
     <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-slideUp border border-slate-200">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-slideUp border border-slate-200 relative">
+        {onClose && (
+            <button 
+                onClick={onClose} 
+                className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
+                title="닫기"
+            >
+                <X size={24} />
+            </button>
+        )}
         <div className="bg-indigo-600 p-6 text-white text-center">
           <div className="mx-auto w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mb-4 backdrop-blur-sm">
             <Key size={24} className="text-white" />
           </div>
           <h2 className="text-2xl font-bold mb-1">API 키 설정</h2>
-          <p className="text-indigo-100 text-sm">Gemini API 키를 입력하여 서비스를 시작하세요.</p>
+          <p className="text-indigo-100 text-sm">
+            {onClose ? '새로운 Gemini API 키를 입력하여 계속하세요.' : 'Gemini API 키를 입력하여 서비스를 시작하세요.'}
+          </p>
         </div>
         
         <div className="p-6 space-y-6">
@@ -61,7 +73,7 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({ onSave }) => {
               type="submit"
               className="w-full py-3.5 bg-indigo-900 text-white font-bold rounded-xl hover:bg-indigo-800 transition-all flex items-center justify-center gap-2 shadow-lg active:scale-95"
             >
-              시작하기 <ChevronRight size={18} />
+              {onClose ? '변경 및 저장' : '시작하기'} <ChevronRight size={18} />
             </button>
           </form>
 
